@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34221.43
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiPhoneEcommerce", "ApiPhoneEcommerce.csproj", "{58D85C88-9A87-4EA0-BDBD-5E225EC28CCC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{58D85C88-9A87-4EA0-BDBD-5E225EC28CCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58D85C88-9A87-4EA0-BDBD-5E225EC28CCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58D85C88-9A87-4EA0-BDBD-5E225EC28CCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58D85C88-9A87-4EA0-BDBD-5E225EC28CCC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B9F94FE0-2DEE-4934-903C-145A39F4EB27}
+	EndGlobalSection
+EndGlobal
