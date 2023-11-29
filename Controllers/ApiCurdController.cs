@@ -58,6 +58,14 @@ namespace ApiPhoneEcommerce.Controllers
             return BadRequest();
         }
 
+        //api get 1 data
+        [HttpGet("thong-tin-khoa/{id}")]
+        public IActionResult ItemKhoa(string id)
+        {
+            var item = _context.Products.FirstOrDefault(x => x.Id == id);
+            return Ok(item);
+        }
+
         [HttpDelete("xoa-khoa/{id}")]
         public IActionResult Delete(string id)
         {
