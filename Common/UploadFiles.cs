@@ -1,4 +1,4 @@
-﻿namespace DemoApi.Common
+﻿namespace ApiPhoneEcommerce.Common
 {
     public class UploadFiles
     {
@@ -11,7 +11,7 @@
                 string id = Guid.NewGuid().ToString();
                 
                 string filePath = Path.Combine(wwwroot, "images", id + "-" + image.FileName);
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                using (var fileStream = new FileStream(path: filePath, FileMode.Create))
                 {
                     image.CopyTo(fileStream);
                     urlPath = Path.Combine("\\images", id + "-" + image.FileName);

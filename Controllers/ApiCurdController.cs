@@ -1,6 +1,7 @@
-﻿using ApiPhoneEcommerce.Models.Curd;
+﻿using ApiPhoneEcommerce.Common;
+using ApiPhoneEcommerce.Models.Curd;
 using ApiPhoneEcommerce.Models.Entity;
-using DemoApi.Common;
+using ApiPhoneEcommerce.Common;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -37,8 +38,8 @@ namespace ApiPhoneEcommerce.Controllers
         }
 
         [HttpPost("them-san-pham")]
-        //public IActionResult TaoKhoa(InputKhoa input)
-        public IActionResult AddSP([FromForm] InputCurd input)
+        
+        public IActionResult AddSP([FromForm] InputProduct input)
         {
             if (ModelState.IsValid)
             {
@@ -57,8 +58,8 @@ namespace ApiPhoneEcommerce.Controllers
                     output.Position = 1;
                     listimage.Add(output);
                 }
-                //product.UrlImages = JsonSerializer.Serialize(listimage);
-
+                product.Urlimg = JsonSerializer.Serialize(listimage);
+                
                 _context.Products.Add(product);
                 _context.SaveChanges();
                 return Ok(product);
