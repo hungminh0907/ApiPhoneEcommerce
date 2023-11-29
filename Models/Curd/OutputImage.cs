@@ -1,6 +1,6 @@
-﻿namespace ApiPhoneEcommerce.Models.Entity
+﻿namespace ApiPhoneEcommerce.Models.Curd
 {
-    public class OutProduct
+    public class OutputImage
     {
         public string? UrlImage { get; set; }
         public int Position { get; set; } = 1;

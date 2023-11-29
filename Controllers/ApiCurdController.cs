@@ -23,14 +23,22 @@ namespace ApiPhoneEcommerce.Controllers
         [HttpGet("Show-danh-sach")]
         public IActionResult DanhSach()
         {
-            var item = _context.Products.ToList();
+            var item = _context.Products
+                .Select(x => new OutputProduct(){
+                    
+                    ProductId = x.ProductId,
+                    ProductName = x.ProductName,
+                    UnitPrice = x.UnitPrice,
+
+                 })
+                .ToList();
             return  Ok(item);
 
         }
 
         [HttpPost("them-san-pham")]
         //public IActionResult TaoKhoa(InputKhoa input)
-        public IActionResult TaoKhoa([FromForm] InputCurd input)
+        public IActionResult AddSP([FromForm] InputCurd input)
         {
             if (ModelState.IsValid)
             {
@@ -40,16 +48,16 @@ namespace ApiPhoneEcommerce.Controllers
                 product.ProductName = input.ProductName;
                 product.Description = input.Description;
                 product.UnitPrice = input.UnitPrice;
-                product.Filter = input.ProductId + " " + input.ProductName.ToLower();
-                //List<OutputImage> listimage = new List<OutputImage>();
-                //foreach (var img in input.Images)
-                //{
-                //    OutputImage output = new OutputImage();
-                //    output.UrlImage = UploadFiles.SaveImage(img);
-                //    output.Position = 1;
-                //    listimage.Add(output);
-                //}
-                //khoa.UrlImages = JsonSerializer.Serialize(listimage);
+                product.Filter = input.ProductId + " " + input.ProductName;
+                List<OutputImage> listimage = new List<OutputImage>();
+                foreach (var img in input.Images)
+                {
+                    OutputImage output = new OutputImage();
+                    output.UrlImage = UploadFiles.SaveImage(img);
+                    output.Position = 1;
+                    listimage.Add(output);
+                }
+                //product.UrlImages = JsonSerializer.Serialize(listimage);
 
                 _context.Products.Add(product);
                 _context.SaveChanges();

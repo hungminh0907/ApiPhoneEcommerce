@@ -3,10 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ApiPhoneEcommerce.Models.Curd
 {
-    public class InputCurd
+    public class UpdateProduct
     {
-        public string Id { get; set; } = null!;
-
         [StringLength(20)]
         public string? ProductId { get; set; }
 
@@ -22,7 +20,7 @@ namespace ApiPhoneEcommerce.Models.Curd
         [StringLength(255)]
         public string? Filter { get; set; }
 
-        public IFormFileCollection Images { get; set; }
-
+        [StringLength(255)]
+        public string? Urlimg { get; set; }
     }
 }
