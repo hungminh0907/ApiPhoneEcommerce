@@ -1,7 +1,7 @@
-﻿using ApiPhoneEcommerce.Common;
+﻿
 using ApiPhoneEcommerce.Models.Curd;
 using ApiPhoneEcommerce.Models.Entity;
-using ApiPhoneEcommerce.Common;
+using DemoApi.Common;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -26,7 +26,7 @@ namespace ApiPhoneEcommerce.Controllers
         {
             var item = _context.Products
                 .Select(x => new OutputProduct(){
-                    
+                    Id =  x.Id,
                     ProductId = x.ProductId,
                     ProductName = x.ProductName,
                     UnitPrice = x.UnitPrice,
@@ -38,7 +38,6 @@ namespace ApiPhoneEcommerce.Controllers
         }
 
         [HttpPost("them-san-pham")]
-        
         public IActionResult AddSP([FromForm] InputProduct input)
         {
             if (ModelState.IsValid)
@@ -50,16 +49,17 @@ namespace ApiPhoneEcommerce.Controllers
                 product.Description = input.Description;
                 product.UnitPrice = input.UnitPrice;
                 product.Filter = input.ProductId + " " + input.ProductName;
+
                 List<OutputImage> listimage = new List<OutputImage>();
-                foreach (var img in input.Images)
+                foreach (var img in input.Urlimg)
                 {
                     OutputImage output = new OutputImage();
-                    output.UrlImage = UploadFiles.SaveImage(img);
+                    output.Urlimg = UploadFiles.SaveImage(img);
                     output.Position = 1;
                     listimage.Add(output);
                 }
                 product.Urlimg = JsonSerializer.Serialize(listimage);
-                
+
                 _context.Products.Add(product);
                 _context.SaveChanges();
                 return Ok(product);
@@ -68,14 +68,14 @@ namespace ApiPhoneEcommerce.Controllers
         }
 
         //api get 1 data
-        [HttpGet("thong-tin-khoa/{id}")]
+        [HttpGet("thong-tin-san-pham/{id}")]
         public IActionResult ItemKhoa(string id)
         {
             var item = _context.Products.FirstOrDefault(x => x.Id == id);
             return Ok(item);
         }
 
-        [HttpDelete("xoa-khoa/{id}")]
+        [HttpDelete("xoa-san-pham/{id}")]
         public IActionResult Delete(string id)
         {
             var item = _context.Products.FirstOrDefault(x => x.Id == id);
@@ -85,6 +85,24 @@ namespace ApiPhoneEcommerce.Controllers
                 _context.SaveChanges();
             }
             return Ok();
+        }
+        [HttpPut("cap-nhat-san-pham/{id}")]
+        public IActionResult CapNhat(Guid id, [FromForm] UpdateProduct input)
+        {
+            var item = _context.Products.FirstOrDefault(c => c.Id == id.ToString());
+            if (item != null)
+            {
+                item.ProductId = input.ProductId;
+                item.ProductName = input.ProductName;
+                item.Description = input.Description;
+                item.UnitPrice = input.UnitPrice;
+                item.Filter = input.ProductId + " " + input.ProductName;
+
+                _context.Products.Update(item);
+                _context.SaveChanges();
+                return Ok(item);
+            }
+            return NotFound();
         }
     }
 }

@@ -2,11 +2,11 @@
 {
     public class OutputImage
     {
-        public string? UrlImage { get; set; }
+        public string? Urlimg { get; set; }
         public int Position { get; set; } = 1;
         public OutputImage()
         {
-            UrlImage = null;
+            Urlimg = null;
             Position = 1;
         }
     }

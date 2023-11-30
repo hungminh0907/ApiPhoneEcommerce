@@ -14,5 +14,6 @@ namespace ApiPhoneEcommerce.Models.Entity
 
         public decimal? UnitPrice { get; set; }
 
+        public string? UrlImages { get; set; }
     }
 }
