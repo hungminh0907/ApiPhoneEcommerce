@@ -51,6 +51,7 @@ namespace ApiPhoneEcommerce.Controllers
                 product.Filter = input.ProductId + " " + input.ProductName;
 
                 List<OutputImage> listimage = new List<OutputImage>();
+                //ListOutputImage images = new ListOutputImage();
                 foreach (var img in input.Urlimg)
                 {
                     OutputImage output = new OutputImage();
