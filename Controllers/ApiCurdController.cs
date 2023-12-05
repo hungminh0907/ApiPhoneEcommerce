@@ -30,6 +30,7 @@ namespace ApiPhoneEcommerce.Controllers
                     ProductId = x.ProductId,
                     ProductName = x.ProductName,
                     UnitPrice = x.UnitPrice,
+                    UrlImages = x.Urlimg 
 
                  })
                 .ToList();
