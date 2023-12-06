@@ -30,7 +30,7 @@ namespace ApiPhoneEcommerce.Controllers
                     ProductId = x.ProductId,
                     ProductName = x.ProductName,
                     UnitPrice = x.UnitPrice,
-                    UrlImages = x.Urlimg 
+                    Urlimg = x.Urlimg 
 
                  })
                 .ToList();
@@ -52,7 +52,7 @@ namespace ApiPhoneEcommerce.Controllers
                 product.Filter = input.ProductId + " " + input.ProductName;
 
                 List<OutputImage> listimage = new List<OutputImage>();
-                //ListOutputImage images = new ListOutputImage();
+                
                 foreach (var img in input.Urlimg)
                 {
                     OutputImage output = new OutputImage();

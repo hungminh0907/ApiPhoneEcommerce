@@ -8,10 +8,10 @@
 
     public class ListOutputImage
     {
-        public List<OutputImage> Images { get; set; } = new List<OutputImage>();
+        public List<OutputImage> Urlimg { get; set; } = new List<OutputImage>();
         public ListOutputImage() 
         {
-            Images = new List<OutputImage>();
+            Urlimg = new List<OutputImage>();
         }
     }
 }
