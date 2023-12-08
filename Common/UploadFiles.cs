@@ -16,7 +16,7 @@
                     img.CopyTo(fileStream);
                     urlPath = Path.Combine("\\img", id + "-" + img.FileName);
                 }
-                return urlPath;
+                return  urlPath;
             }
             return null;
         }

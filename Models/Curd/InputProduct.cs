@@ -15,7 +15,7 @@ namespace ApiPhoneEcommerce.Models.Curd
         public string? Description { get; set; }
 
         [Column(TypeName = "numeric(28, 8)")]
-        public decimal? UnitPrice { get; set; }
+        public int? UnitPrice { get; set; }
 
         public IFormFileCollection Urlimg { get; set; }
 
