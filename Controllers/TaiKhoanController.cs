@@ -17,7 +17,7 @@ namespace ApiPhoneEcommerce.Controllers
         }
 
         [HttpPost("dang-ky")]
-        public async Task<IActionResult> DangKy(InputUser input)
+        public async Task<IActionResult> DangKy([FromForm] InputUser input)
         {
             var item = await _context.TaiKhoans.FirstOrDefaultAsync(c => c.Email == input.Email || c.UserName == input.Username);
             if (item != null) return BadRequest();
