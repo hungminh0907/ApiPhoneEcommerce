@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Runtime.CompilerServices;
 using System.Security.Claims;
 using System.Text;
 
@@ -23,13 +24,18 @@ namespace ApiPhoneEcommerce.Controllers
         }
 
         [HttpPost("auth")]
-        public async Task<IActionResult> XacThuc(InputUser input)
+        public async Task<IActionResult> XacThuc([FromForm] InputUser input)
         {
             var item = await _context.TaiKhoans.FirstOrDefaultAsync(c => c.Email == input.Email
             && c.UserName == input.Username
             && c.PasswordHash == input.Password);
+
             if (item == null) return Unauthorized();
-            var token = GenerateJWT(item);
+
+            var role = await _context.Roles.FirstOrDefaultAsync(r => r.UserName == input.Username);
+
+            var token = GenerateJWT(item, role);
+
             return Ok(new OutputToken
             {
                 Token = token,
@@ -39,7 +45,7 @@ namespace ApiPhoneEcommerce.Controllers
             });
         }
 
-        private string GenerateJWT(TaiKhoan taikhoan)
+        private string GenerateJWT(TaiKhoan taikhoan, Role role)
         {
             var security = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Key"]));
             var credentials = new SigningCredentials(security, SecurityAlgorithms.HmacSha256Signature);
@@ -48,7 +54,8 @@ namespace ApiPhoneEcommerce.Controllers
             {
                 new Claim(ClaimTypes.Sid, taikhoan.Id),
                 new Claim(ClaimTypes.Name, taikhoan.UserName),
-                new Claim(ClaimTypes.Role, "admin,users"),
+                //new Claim(ClaimTypes.Role, "admin,users"),
+                new Claim(ClaimTypes.Role, role.RoleName),
             };
             var token = new JwtSecurityToken(
                 issuer: _configuration["JWT:Issuer"],

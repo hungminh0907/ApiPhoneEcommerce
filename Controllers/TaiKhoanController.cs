@@ -33,6 +33,14 @@ namespace ApiPhoneEcommerce.Controllers
             _context.TaiKhoans.Add(taiKhoan);
             _context.SaveChanges();
 
+            //Role
+            Role role = new Role();
+            role.Id = taiKhoan.Id;
+            role.UserName = input.Username;
+            role.RoleName = input.Role;
+            _context.Roles.Add(role);
+            _context.SaveChanges();
+
             return Ok(taiKhoan);
         }
 
