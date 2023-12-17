@@ -1,5 +1,4 @@
-﻿
-using ApiPhoneEcommerce.Models.Curd;
+﻿using ApiPhoneEcommerce.Models.Curd;
 using ApiPhoneEcommerce.Models.Entity;
 using DemoApi.Common;
 using Microsoft.AspNetCore.Http;
@@ -8,11 +7,13 @@ using Microsoft.IdentityModel.Tokens;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 using System.Text.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ApiPhoneEcommerce.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles ="admin")]
     public class ApiCurdController : ControllerBase
     {
         private readonly PhoneEcommerceContext _context;
@@ -21,7 +22,9 @@ namespace ApiPhoneEcommerce.Controllers
         {
             _context = context;
         }
-        [HttpGet("Show-danh-sach")]
+
+        [AllowAnonymous]
+        [HttpGet("Show-danh-sach")]        
         public IActionResult DanhSach()
         {
             var item = _context.Products
@@ -70,7 +73,8 @@ namespace ApiPhoneEcommerce.Controllers
         }
 
         //api get 1 data
-        [HttpGet("thong-tin-san-pham/{id}")]
+        [AllowAnonymous]
+        [HttpGet("thong-tin-san-pham/{id}")]        
         public IActionResult ItemKhoa(string id)
         {
             var item = _context.Products.FirstOrDefault(x => x.Id == id);
@@ -88,6 +92,7 @@ namespace ApiPhoneEcommerce.Controllers
             }
             return Ok();
         }
+
         [HttpPut("cap-nhat-san-pham/{id}")]
         public IActionResult CapNhat(Guid id, [FromForm] UpdateProduct input)
         {
