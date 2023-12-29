@@ -56,12 +56,19 @@ namespace ApiPhoneEcommerce.Controllers
 
                 List<OutputImage> listimage = new List<OutputImage>();
                 
-                foreach (var img in input.Urlimg)
+                if(listimage is not null)
                 {
-                    OutputImage output = new OutputImage();
-                    output.Urlimg = UploadFiles.SaveImage(img);
-                    output.Position = 1;
-                    listimage.Add(output);
+                    foreach (var img in input.Urlimg)
+                    {
+                        OutputImage output = new OutputImage();
+                        output.Urlimg = UploadFiles.SaveImage(img);
+                        output.Position = 1;
+                        listimage.Add(output);
+                    }
+                }
+                else
+                {
+                    listimage.Add(new OutputImage());
                 }
                 product.Urlimg = JsonSerializer.Serialize(listimage);
 
@@ -104,7 +111,17 @@ namespace ApiPhoneEcommerce.Controllers
                 item.Description = input.Description;
                 item.UnitPrice = input.UnitPrice;
                 item.Filter = input.ProductId + " " + input.ProductName;
+                List<OutputImage> listimage = new List<OutputImage>();
+                foreach (var img in input.Urlimg)
+                {
+                    OutputImage output = new OutputImage();
+                    output.Urlimg = UploadFiles.SaveImage(img);
+                    output.Position = 1;
+                    listimage.Add(output);
+                }
+                item.Urlimg = JsonSerializer.Serialize(listimage);
 
+                //item.Urlimg =  UploadFiles.SaveImage(input.Urlimg);
                 _context.Products.Update(item);
                 _context.SaveChanges();
                 return Ok(item);

@@ -31,5 +31,15 @@
             }
             return false;
         }
+
+        internal static string? SaveImage(string? urlimg)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static string SaveImage(char img)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
