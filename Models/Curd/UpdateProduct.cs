@@ -21,6 +21,6 @@ namespace ApiPhoneEcommerce.Models.Curd
         public string? Filter { get; set; }
 
         [StringLength(255)]
-        public string? Urlimg { get; set; }
+        public IFormFileCollection Urlimg { get; set; }
     }
 }
