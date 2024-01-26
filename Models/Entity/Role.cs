@@ -12,6 +12,6 @@ namespace ApiPhoneEcommerce.Models.Entity
         public string? UserName { get; set; }
 
         [StringLength(50)]
-        public string? RoleName { get; set; }
+        public string? RoleName { get; set; } = "user";
     }
 }

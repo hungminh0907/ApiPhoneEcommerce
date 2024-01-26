@@ -55,8 +55,8 @@ namespace ApiPhoneEcommerce.Controllers
                 product.Filter = input.ProductId + " " + input.ProductName;
 
                 List<OutputImage> listimage = new List<OutputImage>();
-                
-                if(listimage is not null)
+
+                if (listimage is not null)
                 {
                     foreach (var img in input.Urlimg)
                     {
@@ -68,7 +68,7 @@ namespace ApiPhoneEcommerce.Controllers
                 }
                 else
                 {
-                    listimage.Add(new OutputImage());
+                    listimage.Add(new OutputImage() { Urlimg = "http://localhost:7007/img/LogoApple.png", Position = 1 }) ;
                 }
                 product.Urlimg = JsonSerializer.Serialize(listimage);
 

@@ -31,13 +31,14 @@ namespace ApiPhoneEcommerce.Controllers
             taiKhoan.EmailConfirmed = true;
 
             _context.TaiKhoans.Add(taiKhoan);
-            _context.SaveChanges();
+  
 
             //Role
             Role role = new Role();
             role.Id = taiKhoan.Id;
             role.UserName = input.Username;
-            role.RoleName = input.Role;
+            role.RoleName = "user";
+            
             _context.Roles.Add(role);
             _context.SaveChanges();
 

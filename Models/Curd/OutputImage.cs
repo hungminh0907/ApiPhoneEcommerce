@@ -2,12 +2,12 @@
 {
     public class OutputImage
     {
-        public string Urlimg { get; set; } = null;
+        public string Urlimg { get; set; }
         public int Position { get; set; } = 1;
         public OutputImage()
         {
-            Urlimg = "http://localhost:7007/img/LogoApple.png";
-            Position = 1;
+            this.Urlimg = "http://localhost:7007/img/LogoApple.png";
+            this.Position = 1;
         }
 
     }
